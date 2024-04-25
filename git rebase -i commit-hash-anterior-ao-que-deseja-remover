@@ -1,0 +1,59 @@
+[33mcommit 439753b0fa47ad54c8f6f17b1b997fdd9f6542df[m[33m ([m[1;36mHEAD -> [m[1;32mimprovement[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/improvement[m[33m, [m[1;32mmain[m[33m)[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Thu Apr 25 11:01:11 2024 -0300
+
+    correcao de bug ao iniciar
+
+[33mcommit f036e2a572493af754f72b7aef7b351bee32be3c[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Thu Apr 25 10:52:05 2024 -0300
+
+    Mudanca na aothorizacao de requizicoes
+
+[33mcommit aae497fe0893f87aee4bfedaf7b38ffde1025925[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Wed Apr 24 17:24:21 2024 -0300
+
+    adicionado metodo de deletar usuario
+
+[33mcommit 7bd8a1f93fbdd1aaac798e40ffe5180659d5b838[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Tue Apr 23 14:50:31 2024 -0300
+
+    primeiro commit: correcoes de espaços
+
+[33mcommit ee349e1b53de5f7c96a2945b072af556034fe0a9[m[33m ([m[1;32mcheckout[m[33m)[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Mon Apr 22 23:30:39 2024 -0300
+
+     teste quatro
+
+[33mcommit 4420ca60d3cab50da9e29bb4d927dffddd600fdc[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Mon Apr 22 22:55:10 2024 -0300
+
+    teste tres
+
+[33mcommit 072e7c3fb76a632391a46143a9e44421b15ea4b0[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Mon Apr 22 22:38:38 2024 -0300
+
+    teste dois
+
+[33mcommit 0b467d7ea36884e717a6532c7c91180d7962fa38[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Mon Apr 22 21:33:10 2024 -0300
+
+    teste 1
+
+[33mcommit 1c0fdc7df4b48f5b18a62fe074cee0ad73d5dfdd[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Mon Apr 22 14:08:10 2024 -0300
+
+    feach: Usuario Service
+
+[33mcommit edfd6a713cafa8630fa56830660193fbc3e3da80[m
+Author: DevRodrigoSantana <dev.rodrigosantana@hotmail.com>
+Date:   Fri Apr 19 20:25:08 2024 -0300
+
+    commit inicial
