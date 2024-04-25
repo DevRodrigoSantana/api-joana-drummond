@@ -1,6 +1,7 @@
 package com.drummond.IA.config;
 
 import com.drummond.IA.jwt.JwtAuthorizationFilter;
+import com.drummond.IA.jwt.JwtauthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -35,6 +36,8 @@ public class SpringSecurityConfig {
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ).addFilterBefore(
                         jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class
+                ).exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(new JwtauthenticationEntryPoint())
                 ).build();
     }
 
