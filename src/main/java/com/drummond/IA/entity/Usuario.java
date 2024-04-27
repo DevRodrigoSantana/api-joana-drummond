@@ -52,7 +52,5 @@ public class Usuario {
                 "id=" + id +
                 '}';
     }
-
-
-
+    
 }
