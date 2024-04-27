@@ -25,7 +25,7 @@ public class UsuarioService {
             usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
             return usuarioRepository.save(usuario);
         } catch (org.springframework.dao.DataIntegrityViolationException ex) {
-            throw new UsernameUniqueViolationException(String.format("Username '%s' já cadastrado", usuario.getUsername()));
+            throw new UsernameUniqueViolationException(String.format("Username '%s' já cadastrado", usuario.getEmail()));
         }
     }
 
@@ -57,15 +57,15 @@ public class UsuarioService {
     }
 
     @Transactional(readOnly = true)
-    public Usuario buscarPorUsername(String username) {
-        return usuarioRepository.findByUsername(username).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Usuario com '%s' não encontrado", username))
+    public Usuario buscarPorUsername(String email) {
+        return usuarioRepository.findByEmail(email).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Usuario com '%s' não encontrado", email))
         );
     }
 
     @Transactional(readOnly = true)
     public Usuario.Role buscarRolePorUsername(String username) {
-        return usuarioRepository.findRoleByUsername(username);
+        return usuarioRepository.findRoleByEmail(username);
     }
 
     public void deletarUsuario(Long id, String password, String confirmaPasword) {

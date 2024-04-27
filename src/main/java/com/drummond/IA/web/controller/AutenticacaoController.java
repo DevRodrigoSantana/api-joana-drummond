@@ -29,18 +29,18 @@ public class AutenticacaoController {
 
     @PostMapping("/auth")
     public ResponseEntity<?> autenticar(@RequestBody @Valid UsuarioLoginDto dto, HttpServletRequest request) {
-        log.info("Processo de autenticação pelo login {}", dto.getUsername());
+        log.info("Processo de autenticação pelo login {}", dto.getEmail());
         try {
             UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword());
+                    new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
 
             authenticationManager.authenticate(authenticationToken);
 
-            JwtToken token = detailsService.getTokenAuthenticated(dto.getUsername());
+            JwtToken token = detailsService.getTokenAuthenticated(dto.getEmail());
 
             return ResponseEntity.ok(token);
         } catch (AuthenticationException ex) {
-            log.warn("Bad Credentials from username '{}'", dto.getUsername());
+            log.warn("Bad Credentials from username '{}'", dto.getEmail());
         }
         return ResponseEntity
                 .badRequest()

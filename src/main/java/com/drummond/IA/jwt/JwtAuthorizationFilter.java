@@ -37,15 +37,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String username = JwtUtils.getUsernameFromToken(token);
+        String email = JwtUtils.getUsernameFromToken(token);
 
-        toAuthentication(request, username);
+        toAuthentication(request, email);
 
         filterChain.doFilter(request, response);
     }
 
-    private void toAuthentication(HttpServletRequest request, String username) {
-        UserDetails userDetails = detailsService.loadUserByUsername(username);
+    private void toAuthentication(HttpServletRequest request, String email) {
+        UserDetails userDetails = detailsService.loadUserByUsername(email);
 
         UsernamePasswordAuthenticationToken authenticationToken = UsernamePasswordAuthenticationToken
                 .authenticated(userDetails, null, userDetails.getAuthorities());

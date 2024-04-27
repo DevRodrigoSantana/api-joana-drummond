@@ -15,7 +15,7 @@ public class UsuarioCreateDto {
 
     @NotBlank
     @Email(message = "formato do e-mail está invalido", regexp = "^[a-z0-9.+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")
-    private String username;
+    private String email;
     @NotBlank
     @Pattern(message = "Formato de senha não contem caracteres validos ",  regexp = "^[a-zA-Z0-9\\s\\p{Punct}]+$")
     @Size(min = 6, max = 15)
