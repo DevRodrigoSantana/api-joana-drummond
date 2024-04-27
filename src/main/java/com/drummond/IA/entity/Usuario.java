@@ -30,10 +30,10 @@ public class Usuario {
     private String dataDeNascimento;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 25)
-    private Role role = Role.ROLE_ALUNO;
+    private Role role = Role.ROLE_CLIENTE;
 
     public enum Role {
-        ROLE_ADMIN, ROLE_ALUNO
+        ROLE_ADMIN, ROLE_CLIENTE
     }
     @Override
     public boolean equals(Object o) {

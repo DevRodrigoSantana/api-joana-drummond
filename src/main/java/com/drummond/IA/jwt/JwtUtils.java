@@ -32,13 +32,14 @@ public class JwtUtils {
         LocalDateTime end = dateTime.plusDays(EXPIRE_DAYS).plusHours(EXPIRE_HOURS).plusMinutes(EXPIRE_MINUTES);
         return Date.from(end.atZone(ZoneId.systemDefault()).toInstant());
     }
-    public static JwtToken createToken(String username, String role) {
+    public static JwtToken createToken(String id,String username, String role) {
         Date issuedAt = new Date();
         Date limit = toExpireDate(issuedAt);
 
         String token = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setSubject(username)
+                .claim("id", id)  // Inclui o ID do usuário como uma reivindicação adicional
                 .setIssuedAt(issuedAt)
                 .setExpiration(limit)
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
