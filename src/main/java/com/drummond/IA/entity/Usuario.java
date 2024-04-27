@@ -30,7 +30,7 @@ public class Usuario {
     private String dataDeNascimento;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 25)
-    private Role role = Role.ROLE_ADMIN;
+    private Role role = Role.ROLE_ALUNO;
 
     public enum Role {
         ROLE_ADMIN, ROLE_ALUNO
