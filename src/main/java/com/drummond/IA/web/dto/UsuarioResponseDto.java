@@ -13,7 +13,6 @@ public class UsuarioResponseDto {
     private String nome;
     private String username;
     private String role;
-    private String telefone;
-    private String dataDeNascimento;
+
 
 }

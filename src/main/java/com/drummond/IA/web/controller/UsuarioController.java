@@ -28,20 +28,20 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioMapper.toResponseDto(user));
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or (hasRole('CLIENTE') AND #id == authentication.principal.id)")
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('ALUNO') AND #id == authentication.principal.id)")
     public ResponseEntity<UsuarioResponseDto> getById(@PathVariable Long id) {
         Usuario user = usuarioService.buscarPorId(id);
         return ResponseEntity.ok(UsuarioMapper.toResponseDto(user));
     }
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')  AND (#id == authentication.principal.id)")
+    @PreAuthorize("hasAnyRole('ADMIN', 'ALUNO')  AND (#id == authentication.principal.id)")
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @Valid @RequestBody UsuarioSenhaDto dto) {
         Usuario user = usuarioService.editarSenha(id, dto.getSenhaAtual(), dto.getNovaSenha(), dto.getConfirmaSenha());
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or (hasRole('CLIENTE') AND #id == authentication.principal.id)")
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('ALUNO') AND #id == authentication.principal.id)")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioDelete dto){
         usuarioService.deletarUsuario(id,dto.getPassword(),dto.getConfirmaPasword());
         return  ResponseEntity.noContent().build();
