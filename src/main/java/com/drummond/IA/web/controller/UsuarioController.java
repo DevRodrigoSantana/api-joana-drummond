@@ -17,38 +17,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-    @PostMapping("/cadastrar")
+    @PostMapping("/create")
     public ResponseEntity<UsuarioResponseDto> create(@Valid @RequestBody UsuarioCreateDto createDto) {
         Usuario user = usuarioService.salvar(UsuarioMapper.toUsuario(createDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioMapper.toResponseDto(user));
     }
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/search/{id}")
     @PreAuthorize("hasRole('ADMIN') or (hasRole('ALUNO') AND #id == authentication.principal.id)")
     public ResponseEntity<UsuarioResponseDto> getById(@PathVariable Long id) {
         Usuario user = usuarioService.buscarPorId(id);
         return ResponseEntity.ok(UsuarioMapper.toResponseDto(user));
     }
 
-    @PatchMapping("/alterar/{id}")
+    @PatchMapping("/update-password/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'ALUNO')  AND (#id == authentication.principal.id)")
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @Valid @RequestBody UsuarioSenhaDto dto) {
         Usuario user = usuarioService.editarSenha(id, dto.getSenhaAtual(), dto.getNovaSenha(), dto.getConfirmaSenha());
         return ResponseEntity.noContent().build();
     }
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/delete-user/{id}")
     @PreAuthorize("hasRole('ADMIN') or (hasRole('ALUNO') AND #id == authentication.principal.id)")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioDelete dto){
-        usuarioService.deletarUsuario(id,dto.getPassword(),dto.getConfirmaPasword());
+        usuarioService.deletarUsuario(id,dto.getPassword(),dto.getConfirmaPassword());
         return  ResponseEntity.noContent().build();
     }
 
 
-    @GetMapping("/listar")
+    @GetMapping("/list")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioResponseDto>> getAll() {
         List<Usuario> users = usuarioService.buscarTodos();

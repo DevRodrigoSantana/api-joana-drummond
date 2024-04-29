@@ -22,12 +22,12 @@ public class UsuarioCreateDto {
     private String password;
     @NotBlank
     @Pattern(message = "Formato de nome Ivalido", regexp = "^[a-zA-Z\\s]+$")
-    private String nome;
+    private String username;
     @NotBlank
     @Pattern(message = "data de nascimento de formato Incorreto",regexp = "^\\d{2}/\\d{2}/\\d{4}$" )
     private String  dataDeNascimento;
     @NotBlank
     @Pattern(message = "formato de telefone Incorreto",regexp = "^\\(?(\\d{2})\\)?[ ]?(\\d{4,5})[- ]?(\\d{4})$")
-    private String telefone;
+    private String telephone;
 }
 

@@ -20,12 +20,12 @@ public class Usuario {
     private Long id;
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
-    @Column(name = "Nome_Completo", nullable = false , unique = false, length = 100)
-    private String nome;
+    @Column(name = "username", nullable = false , unique = false, length = 100)
+    private String username;
     @Column(name = "password", nullable = false, length = 200)
     private String password;
-    @Column(name = "telefone",nullable = false,length = 15)
-    private String  telefone;
+    @Column(name = "telephone",nullable = false,length = 15)
+    private String  telephone;
     @Column(name = "data_Nascimento",nullable = false,length = 10)
     private String dataDeNascimento;
     @Enumerated(EnumType.STRING)
