@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://joana-ai-drummond.up.railway.app")
+@CrossOrigin(origins = "*")
 
 public class UsuarioController {
 
