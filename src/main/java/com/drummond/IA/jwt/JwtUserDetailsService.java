@@ -25,4 +25,10 @@ public class JwtUserDetailsService implements UserDetailsService {
         String id = String.valueOf(user.getId());
         return JwtUtils.createToken(id,email, role.name().substring("ROLE_".length()));
     }
+    public RefreshToken getRefreshToken(String email) {
+        Usuario.Role role = usuarioService.buscarRolePorUsername(email);
+        Usuario user = usuarioService.buscarPorUsername(email);
+        String id = String.valueOf(user.getId());
+        return new RefreshToken(JwtUtils.createRefreshToken(id, email).getToken());
+    }
 }
