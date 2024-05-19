@@ -19,11 +19,11 @@ public class JwtUtils {
     public static final String JWT_AUTHORIZATION = "Authorization";
     public static final String SECRET_KEY = "0123456789-0123456789-0123456789";
     public static final long EXPIRE_DAYS = 0;
-    public static final long EXPIRE_HOURS = 0;
-    public static final long EXPIRE_MINUTES = 2;
+    public static final long EXPIRE_HOURS = 1;
+    public static final long EXPIRE_MINUTES = 0;
 
     //refresh
-    private static final long REFRESH_EXPIRE_DAYS =3;
+    private static final long REFRESH_EXPIRE_DAYS =15;
     private JwtUtils(){
     }
 
@@ -36,6 +36,8 @@ public class JwtUtils {
         return Date.from(end.atZone(ZoneId.systemDefault()).toInstant());
     }
     public static JwtToken createToken(String id,String email, String role) {
+        String aud = "https://johannagpt.netlify.app/";
+        String iss = "https://joana-ai-drummond.up.railway.app/auth";
         Date issuedAt = new Date();
         Date limit = toExpireDateAcess(issuedAt);
 
@@ -43,6 +45,8 @@ public class JwtUtils {
                 .setHeaderParam("typ", "JWT")
                 .setSubject(email)
                 .claim("id", id)
+                .claim("aud", aud)
+                .claim("iss", iss)
                 .setIssuedAt(issuedAt)
                 .setExpiration(limit)
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
@@ -55,12 +59,16 @@ public class JwtUtils {
     //criar refresh token
 
     public static RefreshToken createRefreshToken(String id, String email){
+        String aud = "https://johannagpt.netlify.app/";
+        String iss = "https://joana-ai-drummond.up.railway.app/refresh";
         Date issuedAt = new Date();
-        Date limit = toExpireDate(issuedAt,0,0,3);
+        Date limit = toExpireDate(issuedAt,REFRESH_EXPIRE_DAYS,0,0);
         String token = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setSubject(email)
                 .claim("id", id)
+                .claim("aud", aud)
+                .claim("iss", iss)
                 .setIssuedAt(issuedAt)
                 .setExpiration(limit)
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
