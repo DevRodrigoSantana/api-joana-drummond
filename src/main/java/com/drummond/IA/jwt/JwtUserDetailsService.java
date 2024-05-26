@@ -23,7 +23,8 @@ public class JwtUserDetailsService implements UserDetailsService {
         Usuario.Role role = usuarioService.buscarRolePorUsername(email);
         Usuario user = usuarioService.buscarPorUsername(email);
         String id = String.valueOf(user.getId());
-        return JwtUtils.createToken(id,email, role.name().substring("ROLE_".length()));
+        String username = user.getUsername();
+        return JwtUtils.createToken(id,email, role.name().substring("ROLE_".length()),username);
     }
     public RefreshToken getRefreshToken(String email) {
         Usuario.Role role = usuarioService.buscarRolePorUsername(email);
