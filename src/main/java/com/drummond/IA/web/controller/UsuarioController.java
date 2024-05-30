@@ -2,10 +2,7 @@ package com.drummond.IA.web.controller;
 
 import com.drummond.IA.entity.Usuario;
 import com.drummond.IA.service.UsuarioService;
-import com.drummond.IA.web.dto.UsuarioCreateDto;
-import com.drummond.IA.web.dto.UsuarioDelete;
-import com.drummond.IA.web.dto.UsuarioResponseDto;
-import com.drummond.IA.web.dto.UsuarioSenhaDto;
+import com.drummond.IA.web.dto.*;
 import com.drummond.IA.web.dto.mapper.UsuarioMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,13 +43,16 @@ public class UsuarioController {
         usuarioService.deletarUsuario(id,dto.getPassword(),dto.getConfirmaPassword());
         return  ResponseEntity.noContent().build();
     }
-
-
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioResponseDto>> getAll() {
         List<Usuario> users = usuarioService.buscarTodos();
         return ResponseEntity.ok(UsuarioMapper.toListaDto(users));
+    }
+    @PatchMapping("/status/{id}")
+    public ResponseEntity<Void> updateStatus(@PathVariable Long id,@Valid @RequestBody UsuarioStatus dtoStatus){
+        Usuario user = usuarioService.atualizarStatus(id,dtoStatus.getStatus());
+        return ResponseEntity.noContent().build();
     }
 
 }

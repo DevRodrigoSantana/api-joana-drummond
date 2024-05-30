@@ -1,11 +1,14 @@
 package com.drummond.IA.jwt;
 
+import com.drummond.IA.config.SpringSecurityConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -15,13 +18,13 @@ import java.util.Base64;
 import java.util.Date;
 
 @Slf4j
+@Component
 public class JwtUtils {
     public static final String JWT_BEARER = "Bearer ";
     public static final String JWT_AUTHORIZATION = "Authorization";
-    public static final String SECRET_KEY = "0123456789-0123456789-0123456789";
     public static final long EXPIRE_DAYS = 0;
-    public static final long EXPIRE_HOURS = 1;
-    public static final long EXPIRE_MINUTES = 0;
+    public static final long EXPIRE_HOURS = 0;
+    public static final long EXPIRE_MINUTES = 10;
 
     // Refresh token expiration
     private static final long REFRESH_EXPIRE_DAYS = 15;
@@ -30,7 +33,8 @@ public class JwtUtils {
     }
 
     private static Key generateKey() {
-        Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+         String secretKey = SpringSecurityConfig.getSecretKey();
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         return key;
     }
 

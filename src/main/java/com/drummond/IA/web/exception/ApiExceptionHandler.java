@@ -2,9 +2,11 @@ package com.drummond.IA.web.exception;
 
 import com.drummond.IA.exception.EntityNotFoundException;
 import com.drummond.IA.exception.PasswordInvalidException;
+import com.drummond.IA.exception.StatusInavlido;
 import com.drummond.IA.exception.UsernameUniqueViolationException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +61,14 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
+    }
+    @ExceptionHandler(StatusInavlido.class)
+    public  ResponseEntity<ErrorMessage> stausInvalido(RuntimeException ex, HttpServletRequest request){
+        log.error("Api Error - ",ex);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request,HttpStatus.BAD_REQUEST, ex.getMessage()));
     }
 
 

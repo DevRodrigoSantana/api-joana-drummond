@@ -3,6 +3,7 @@ package com.drummond.IA.service;
 import com.drummond.IA.entity.Usuario;
 import com.drummond.IA.exception.EntityNotFoundException;
 import com.drummond.IA.exception.PasswordInvalidException;
+import com.drummond.IA.exception.StatusInavlido;
 import com.drummond.IA.exception.UsernameUniqueViolationException;
 import com.drummond.IA.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -80,5 +81,23 @@ public class UsuarioService {
         }
         usuarioRepository.delete(user);
     }
-}
 
+    public Usuario atualizarStatus(Long id, String statusString) throws StatusInavlido {
+        Usuario.Status novoStatus;
+        try {
+            novoStatus = Usuario.Status.valueOf(statusString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            // Se a string não corresponder a nenhum valor do enum Status, lance uma exceção StatusInvalido
+            throw new StatusInavlido("Status inválido: " + statusString);
+        }
+        Usuario user = buscarPorId(id);
+        user.setStatus(novoStatus);
+        return  usuarioRepository.save(user);
+
+       }
+
+
+
+
+
+    }

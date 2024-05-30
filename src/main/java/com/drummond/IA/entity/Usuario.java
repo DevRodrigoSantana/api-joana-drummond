@@ -31,9 +31,15 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 25)
     private Role role = Role.ROLE_ALUNO;
+    @Column(name = "status",nullable = false,length = 9)
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.ACTIVE ;
 
     public enum Role {
         ROLE_ADMIN, ROLE_ALUNO
+    }
+    public enum Status{
+        ACTIVE,DISABLED
     }
     @Override
     public boolean equals(Object o) {

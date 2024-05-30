@@ -2,6 +2,7 @@ package com.drummond.IA.config;
 
 import com.drummond.IA.jwt.JwtAuthorizationFilter;
 import com.drummond.IA.jwt.JwtauthenticationEntryPoint;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -56,5 +57,16 @@ public class SpringSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    //configuracao jwt
+    private static String secretKey;
+    @Value("${app.secretkey}")
+    public void setSecretKey(String secretKey) {
+        SpringSecurityConfig.secretKey = secretKey;
+    }
+
+    public static String getSecretKey() {
+        return secretKey;
     }
 }
