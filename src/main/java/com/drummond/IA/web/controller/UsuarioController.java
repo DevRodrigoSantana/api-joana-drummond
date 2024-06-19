@@ -38,7 +38,7 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or (hasRole('ALUNO') AND #id == authentication.principal.id)")
+
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioDelete dto){
         usuarioService.deletarUsuario(id,dto.getPassword(),dto.getConfirmaPassword());
         return  ResponseEntity.noContent().build();
@@ -50,9 +50,20 @@ public class UsuarioController {
         return ResponseEntity.ok(UsuarioMapper.toListaDto(users));
     }
     @PatchMapping("/status/{id}")
+
     public ResponseEntity<Void> updateStatus(@PathVariable Long id,@Valid @RequestBody UsuarioStatus dtoStatus){
         Usuario user = usuarioService.atualizarStatus(id,dtoStatus.getStatus());
         return ResponseEntity.noContent().build();
     }
+
+
+
+    @PatchMapping("/altera-role/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> updateRole(@PathVariable Long id, @Valid @RequestBody UsuarioRoledto dto  ){
+        Usuario user = usuarioService.alterarRole(id,dto.getRole());
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

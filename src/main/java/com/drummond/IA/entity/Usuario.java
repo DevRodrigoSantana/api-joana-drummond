@@ -30,7 +30,7 @@ public class Usuario {
     private String dataDeNascimento;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 25)
-    private Role role = Role.ROLE_ALUNO;
+    private Role role = Role.ROLE_ADMIN;
     @Column(name = "status",nullable = false,length = 9)
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE ;

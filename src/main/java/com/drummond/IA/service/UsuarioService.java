@@ -81,7 +81,7 @@ public class UsuarioService {
         }
         usuarioRepository.delete(user);
     }
-
+    @Transactional
     public Usuario atualizarStatus(Long id, String statusString) throws StatusInavlido {
         Usuario.Status novoStatus;
         try {
@@ -98,6 +98,20 @@ public class UsuarioService {
 
 
 
+    public Usuario alterarRole(Long id, String novaRole) {
 
+
+        Usuario user = buscarPorId(id);
+
+        Usuario.Role novoRoleEnum;
+        try {
+            novoRoleEnum = Usuario.Role.valueOf("ROLE_" + novaRole.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Role inválida: " + novaRole);
+        }
+        user.setRole(novoRoleEnum);
+        return usuarioRepository.save(user);
 
     }
+
+}
